@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pizza Bianos | Inventory Management System</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="loginPage" class="login-page">
+  <div class="login-bg"><div class="image-placeholder">🍕</div><b>PIZZA BIANOS<br>BACKGROUND IMAGE</b></div>
+  <div class="login-box">
+    <div class="pizza-logo">🍕</div>
+    <h1>PIZZA BIANOS</h1><p>INVENTORY MANAGEMENT SYSTEM</p>
+    <h2>Welcome Back</h2><small>Please login to access the system</small>
+    <form id="loginForm">
+      <label>Username</label><input id="loginUser" required placeholder="Enter your username">
+      <label>Password</label><input id="loginPass" type="password" required placeholder="Enter your password">
+      <div class="login-options"><label class="check"><input id="remember" type="checkbox"> Remember me</label><a href="#" onclick="return false">Forgot password?</a></div>
+      <button class="btn dark full" type="submit">LOGIN</button><div id="loginError" class="error"></div>
+    </form><footer>© 2026 Pizza Bianos &nbsp; • &nbsp; Inventory System</footer>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+<aside id="sidebar" class="sidebar">
+  <div class="mobile-brand">🍕</div>
+  <nav>
+    <button class="nav active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+    <button class="nav" data-page="products">▣ <span>Products</span></button>
+    <button class="nav" data-page="stockin">↙ <span>Stock In</span></button>
+    <button class="nav" data-page="stockout">↗ <span>Stock Out</span></button>
+    <button class="nav" data-page="sales">▤ <span>Sales</span></button>
+    <button class="nav" data-page="reports">▥ <span>Reports</span></button>
+    <button class="nav admin-only" data-page="admin">♟ <span>Users</span></button>
+    <button class="nav admin-only" data-page="settings">⚙ <span>Settings</span></button>
+  </nav>
+</aside>
+<main class="content">
+<header class="topbar"><button id="menuBtn" class="hamb">☰</button><div class="brand"><span class="brand-logo">🍕</span><div><b>Pizza Bianos</b><small>Inventory Management System</small></div></div><div class="account"><span id="accountName">Admin Name</span><button id="logoutBtn" class="btn outline">Logout</button></div></header>
+
+<section id="dashboard" class="page">
+<h2>Dashboard Overview</h2>
+<div class="stats"><div><span>Total Products</span><b id="dProducts">0</b></div><div><span>Low Stock Items</span><b id="dLow">0</b></div><div><span>Stock In (Today)</span><b id="dIn">0</b></div><div><span>Stock Out (Today)</span><b id="dOut">0</b></div><div><span>Sales (Today)</span><b id="dSales">₱ 0</b></div></div>
+<div class="dash-grid"><div class="panel"><h3>Stock Summary</h3><div id="stockChart" class="chart"></div></div><div class="panel"><h3>Recent Transactions</h3><div id="recentTransactions"></div></div></div>
+</section>
+
+<section id="products" class="page hidden">
+<div class="page-head"><h2>Products</h2><button class="btn dark admin-only" onclick="productForm()">＋ Add Product</button></div>
+<div class="panel"><div class="table-scroll"><table><thead><tr><th>ID</th><th>Product Name</th><th>Category</th><th>Supplier</th><th>Quantity</th><th>Unit</th><th>Reorder Level</th><th>Action</th></tr></thead><tbody id="productsTable"></tbody></table></div></div>
+</section>
+
+<section id="stockin" class="page hidden">
+<div class="page-head"><h2>Stock In</h2><button class="btn dark admin-only" onclick="stockInForm()">＋ New Stock In</button></div>
+<div class="panel"><div class="table-scroll"><table><thead><tr><th>ID</th><th>Date</th><th>Product</th><th>Quantity</th><th>Supplier</th><th>Received By</th><th>Action</th></tr></thead><tbody id="stockInTable"></tbody></table></div></div>
+</section>
+
+<section id="stockout" class="page hidden">
+<div class="page-head"><h2>Stock Out</h2><button class="btn dark" onclick="stockOutForm()">＋ New Stock Out</button></div>
+<div class="panel"><div class="table-scroll"><table><thead><tr><th>ID</th><th>Date</th><th>Product</th><th>Customer</th><th>Quantity</th><th>Used For</th><th>Requested By</th><th>Action</th></tr></thead><tbody id="stockOutTable"></tbody></table></div></div>
+</section>
+
+<section id="sales" class="page hidden">
+<div class="page-head"><h2>Sales</h2><button class="btn dark" onclick="saleForm()">＋ New Sale</button></div>
+<div class="panel"><div class="table-scroll"><table><thead><tr><th>Invoice #</th><th>Date</th><th>Customer</th><th>Items</th><th>Total Amount</th><th>Payment</th><th>Action</th></tr></thead><tbody id="salesTable"></tbody></table></div></div>
+</section>
+
+<section id="reports" class="page hidden">
+<h2>Reports</h2><div class="report-grid">
+<button onclick="report('stock')">▧ <b>Stock Report</b><small>View current stock levels</small></button>
+<button onclick="report('in')">▧ <b>Stock In Report</b><small>View stock in transactions</small></button>
+<button onclick="report('out')">▧ <b>Stock Out Report</b><small>View stock out transactions</small></button>
+<button onclick="report('sales')">▧ <b>Sales Report</b><small>View sales summary</small></button>
+<button onclick="report('low')">▧ <b>Low Stock Report</b><small>View low stock items</small></button>
+<button onclick="report('summary')">▧ <b>Summary Report</b><small>View overall summary</small></button>
+</div><div id="reportOutput" class="panel hidden"></div>
+</section>
+
+<section id="admin" class="page hidden">
+<div class="page-head"><h2>Users</h2><button class="btn dark" onclick="userForm()">＋ Add User</button></div>
+<div class="panel"><div class="table-scroll"><table><thead><tr><th>ID</th><th>Username</th><th>Role</th><th>Status</th><th>Action</th></tr></thead><tbody id="usersTable"></tbody></table></div></div>
+</section>
+
+<section id="settings" class="page hidden">
+<h2>Settings</h2><div class="panel settings"><h3>Store Information</h3><label>Store Name<input id="storeName"></label><label>Store Address<input id="storeAddress"></label><label>Contact Number<input id="storeContact"></label><button class="btn dark" onclick="saveSettings()">Save Changes</button><div id="settingsMsg" class="success"></div></div></section>
+</main></div>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle"></h3><button onclick="closeModal()">×</button></div><form id="modalForm"></form></div></div>
+<script src="/script.js"></script>
+</body></html>

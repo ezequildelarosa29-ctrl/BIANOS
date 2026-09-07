@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "functions": {"api/apps-script.js": {"runtime": "nodejs20.x"}},
+  "rewrites": [{"source":"/api/apps-script","destination":"/api/apps-script"}]
+}
