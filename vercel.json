@@ -1,5 +1,5 @@
 {
   "version": 2,
   "functions": {"/apps-script.js": {"runtime": "nodejs20.x"}},
-  "rewrites": [{"source":"/apps-script","destination":"/apps-script"}]
+  "rewrites": [{"source":"apps-script","destination":"apps-script"}]
 }
