@@ -1,5 +1,8 @@
 {
-  "version": 2,
-  "functions": {"apps-script.js": {"runtime": "nodejs20.x"}},
-  "rewrites": [{"source":"apps-script","destination":"apps-script"}]
+  "name": "bianos-pizza-inventory",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "24.x"
+  }
 }
